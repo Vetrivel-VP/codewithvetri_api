@@ -1,0 +1,64 @@
+[
+  {
+    "name": "python",
+    "title": "Python Programming",
+    "trainer": "trainer_id",
+    "data": [
+      {
+        "id": 1000000,
+        "concept_name": "Sample comcept name",
+        "concept_image": "image_url",
+        "concept_video": "video_url",
+        "content": {
+          "code": "sample code",
+          "description": "explanations",
+          "source_link": "source link"
+        }
+      },
+      {
+        "id": 1000001,
+        "concept_name": "Sample comcept name",
+        "concept_image": "image_url",
+        "concept_video": "video_url",
+        "content": {
+          "code": "sample code",
+          "description": "explanations",
+          "source_link": "source link"
+        }
+      }
+    ]
+  },
+  {
+    "name": "web",
+    "title": "Web Designing",
+    "trainer": "trainer_id",
+    "data": [
+      {
+        "id": 2000000,
+        "concept_name": "Sample comcept name",
+        "concept_image": "image_url",
+        "concept_video": "video_url",
+        "content": {
+          "html_code": "sample code",
+          "css_code": "css_code",
+          "js_code": "js_code",
+          "description": "explanations",
+          "source_link": "source link"
+        }
+      },
+      {
+        "id": 2000001,
+        "concept_name": "Sample comcept name",
+        "concept_image": "image_url",
+        "concept_video": "video_url",
+        "content": {
+          "html_code": "sample code",
+          "css_code": "css_code",
+          "js_code": "js_code",
+          "description": "explanations",
+          "source_link": "source link"
+        }
+      }
+    ]
+  }
+]
