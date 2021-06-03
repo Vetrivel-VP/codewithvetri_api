@@ -2,10 +2,10 @@
   {
     "name": "python",
     "title": "Python Programming",
-    "trainer": "trainer_id",
     "data": [
       {
         "id": 1000000,
+        "trainer": "trainer_id",
         "concept_name": "Sample comcept name",
         "concept_image": "image_url",
         "concept_video": "video_url",
@@ -17,6 +17,7 @@
       },
       {
         "id": 1000001,
+        "trainer": "trainer_id",
         "concept_name": "Sample comcept name",
         "concept_image": "image_url",
         "concept_video": "video_url",
@@ -31,10 +32,10 @@
   {
     "name": "web",
     "title": "Web Designing",
-    "trainer": "trainer_id",
     "data": [
       {
         "id": 2000000,
+        "trainer": "trainer_id",
         "concept_name": "Sample comcept name",
         "concept_image": "image_url",
         "concept_video": "video_url",
@@ -48,6 +49,7 @@
       },
       {
         "id": 2000001,
+        "trainer": "trainer_id",
         "concept_name": "Sample comcept name",
         "concept_image": "image_url",
         "concept_video": "video_url",
