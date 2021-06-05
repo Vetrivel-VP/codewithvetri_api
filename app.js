@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 
+// Informiing NodeJs to parase the JSON data: So that we can use json data however we want
+app.use(express.json());
+
+//Middle ware to solve this error : Access-Control-Allow-Origin
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 // loading course data
 const Cources = require("./api/models/cources");
 const cource_data = new Cources();
