@@ -4,27 +4,15 @@
     "title": "Python Programming",
     "data": [
       {
-        "id": 1000000,
-        "trainer": "trainer_id",
-        "concept_name": "Sample comcept name",
-        "concept_image": "image_url",
-        "concept_video": "video_url",
+        "id": "1622915607846",
+        "trainer": "10001",
+        "concept_name": "Sample",
+        "concept_image": "uploads/concept_image-1622915607834.jpeg",
+        "concept_video": "sample Video",
         "content": {
-          "code": "sample code",
-          "description": "explanations",
-          "source_link": "source link"
-        }
-      },
-      {
-        "id": 1000001,
-        "trainer": "trainer_id",
-        "concept_name": "Sample comcept name",
-        "concept_image": "image_url",
-        "concept_video": "video_url",
-        "content": {
-          "code": "sample code",
-          "description": "explanations",
-          "source_link": "source link"
+          "code": "python",
+          "description": "sample",
+          "source_link": "link"
         }
       }
     ]
@@ -34,31 +22,17 @@
     "title": "Web Designing",
     "data": [
       {
-        "id": 2000000,
-        "trainer": "trainer_id",
-        "concept_name": "Sample comcept name",
-        "concept_image": "image_url",
-        "concept_video": "video_url",
+        "id": "1622915369481",
+        "trainer": "10001",
+        "concept_name": "Sample",
+        "concept_image": "uploads/concept_image-1622915369469.jpeg",
+        "concept_video": "sample Video",
         "content": {
-          "html_code": "sample code",
-          "css_code": "css_code",
-          "js_code": "js_code",
-          "description": "explanations",
-          "source_link": "source link"
-        }
-      },
-      {
-        "id": 2000001,
-        "trainer": "trainer_id",
-        "concept_name": "Sample comcept name",
-        "concept_image": "image_url",
-        "concept_video": "video_url",
-        "content": {
-          "html_code": "sample code",
-          "css_code": "css_code",
-          "js_code": "js_code",
-          "description": "explanations",
-          "source_link": "source link"
+          "html_code": "Html",
+          "css_code": "css",
+          "js_code": "js",
+          "description": "sample",
+          "source_link": "link"
         }
       }
     ]

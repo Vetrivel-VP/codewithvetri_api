@@ -16,8 +16,18 @@ class Cources {
     return finalData;
   }
 
-  addNew() {
+  addNew(cource_name, newCource) {
     // to add new course
+    const data = this.readData();
+    for (var i in data) {
+      if (data[i].name == cource_name) {
+        data[i].data.push(newCource);
+      }
+    }
+    // const final_data = cource_data.data;
+    // cource_data.data = final_data.unshift(newCource);
+    this.storeData(data);
+    console.log(data);
   }
 
   editCource() {
@@ -33,6 +43,11 @@ class Cources {
     let rawData = fs.readFileSync(PATH);
     let cources = JSON.parse(rawData);
     return cources;
+  }
+
+  storeData(rawData) {
+    let data = JSON.stringify(rawData);
+    fs.writeFileSync(PATH, data);
   }
 }
 
