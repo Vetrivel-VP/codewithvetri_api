@@ -24,18 +24,27 @@ class Cources {
         data[i].data.push(newCource);
       }
     }
-    // const final_data = cource_data.data;
-    // cource_data.data = final_data.unshift(newCource);
     this.storeData(data);
-    console.log(data);
   }
 
   editCource() {
     // to edit new course
   }
 
-  deleteCource() {
+  deleteCource(cource_name, cource_id) {
     // to delete it permenently
+    const data = this.readData();
+    const cource_data = data.find((cource) => cource.name == cource_name);
+    const finalData = cource_data.data;
+    console.log(finalData);
+    finalData.forEach((element, index) => {
+      if (cource_id == element.id) {
+        finalData.splice(index, 1);
+        this.storeData(finalData);
+        // return "success";
+      }
+    });
+    console.log(finalData);
   }
 
   readData() {

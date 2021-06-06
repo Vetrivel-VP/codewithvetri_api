@@ -98,4 +98,16 @@ app.post(
   }
 );
 
+app.delete(
+  "/api/cources/:cource_name/:cource_id",
+  upload.single("concept_image"),
+  (req, res) => {
+    const cource_name = req.params.cource_name;
+    const cource_id = req.params.cource_id;
+    const result = cource_data.deleteCource(cource_name, cource_id);
+    // console.log(result);
+    res.status(200).send("ok");
+  }
+);
+
 app.listen(3000, () => console.log("Listening port 3000"));
