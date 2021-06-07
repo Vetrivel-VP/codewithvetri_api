@@ -33,25 +33,41 @@ class Cources {
 
   deleteCource(cource_name, cource_id) {
     // to delete it permenently
-    const data = this.readData();
-    const cource_data = data.find((cource) => cource.name == cource_name);
-    const finalData = cource_data.data;
-    console.log(finalData);
-    finalData.forEach((element, index) => {
-      if (cource_id == element.id) {
-        finalData.splice(index, 1);
-        this.storeData(finalData);
-        // return "success";
+    let msg = "";
+    const courceData = this.readData();
+    let filterData = "";
+    courceData.forEach((main_element, i) => {
+      if (main_element.name == cource_name) {
+        courceData[i].data.forEach((element, j) => {
+          if (element.id === cource_id) {
+            let pathImage = element.concept_image;
+            try {
+              fs.unlinkSync(`./${pathImage}`);
+            } catch (error) {}
+          }
+        });
+        filterData = courceData[i].data.filter(
+          (cource) => cource.id !== cource_id
+        );
+        if (courceData[i].data.length === filterData.length) {
+          msg = "Invalid Id : ID doesn't exist !";
+        } else {
+          courceData[i].data = filterData;
+          msg = "Concept Removed Successfully";
+        }
+      } else {
+        msg = "Invalid cource : Cource doesn't exist !";
       }
     });
-    console.log(finalData);
+    // console.log(filterData);
+    this.storeData(courceData);
+    return msg;
   }
 
   readData() {
     //   to read the data from the json file
     let rawData = fs.readFileSync(PATH);
-    let cources = JSON.parse(rawData);
-    return cources;
+    return JSON.parse(rawData);
   }
 
   storeData(rawData) {

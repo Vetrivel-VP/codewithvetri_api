@@ -62,7 +62,7 @@ app.get("/api/cources/:cource_name/:cource_id", (req, res) => {
 
 // To store the new course
 app.post(
-  "/api/cources/:cource_name",
+  "/api/cources/new/:cource_name",
   upload.single("concept_image"),
   (req, res) => {
     // replace the slash in the file path of our image location
@@ -99,14 +99,17 @@ app.post(
 );
 
 app.delete(
-  "/api/cources/:cource_name/:cource_id",
+  "/api/cources/delete/:cource_name/:cource_id",
   upload.single("concept_image"),
   (req, res) => {
     const cource_name = req.params.cource_name;
     const cource_id = req.params.cource_id;
     const result = cource_data.deleteCource(cource_name, cource_id);
-    // console.log(result);
-    res.status(200).send("ok");
+    if (res.status(404)) {
+      res.send(result);
+    } else {
+      res.send(result);
+    }
   }
 );
 
