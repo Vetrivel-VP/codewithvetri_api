@@ -54,9 +54,9 @@ app.get("/api/cources/:cource_name/:cource_id", (req, res) => {
   const cource_name = req.params.cource_name;
   const foundCource = cource_data.getIndividualCource(cource_name, cource_id);
   if (foundCource) {
-    res.status(200).send(foundCource);
+    res.status(200).send({ success: true, cource: foundCource });
   } else {
-    res.status(404).send("Not Found : Invalid Id");
+    res.status(404).send({ error: true, msg: "ID Not found" });
   }
 });
 
@@ -74,6 +74,7 @@ app.post(
       concept_name: req.body.concept_name,
       concept_image: filepath,
       concept_video: req.body.concept_video,
+      added_date: `${Date.now()}`,
     };
     switch (cource_name) {
       case "python":
@@ -94,23 +95,71 @@ app.post(
         break;
     }
     cource_data.addNew(cource_name, newCource);
-    res.status(201).send(newCource);
-  }
-);
-
-app.delete(
-  "/api/cources/delete/:cource_name/:cource_id",
-  upload.single("concept_image"),
-  (req, res) => {
-    const cource_name = req.params.cource_name;
-    const cource_id = req.params.cource_id;
-    const result = cource_data.deleteCource(cource_name, cource_id);
-    if (res.status(404)) {
-      res.send(result);
+    if (
+      newCource.trainer == null ||
+      newCource.concept_name == null ||
+      newCource.concept_video == null ||
+      newCource.content.source_link == null
+    ) {
+      res
+        .status(409)
+        .send({ error: true, msg: "Required parameters must be filled" });
     } else {
-      res.send(result);
+      res.status(201).send({ success: true, msg: "Data added successfully" });
     }
   }
 );
 
-app.listen(3000, () => console.log("Listening port 3000"));
+app.delete("/api/cources/delete/:cource_name/:cource_id", (req, res) => {
+  const cource_name = req.params.cource_name;
+  const cource_id = req.params.cource_id;
+  const result = cource_data.deleteCource(cource_name, cource_id);
+  if (res.status(404)) {
+    res.send({ error: true, msg: result });
+  } else {
+    res.status(200).send({ success: true, msg: result });
+  }
+});
+
+// Trainers API
+
+const Trainers = require("./api/models/trainers");
+const trainers = new Trainers();
+app.get("/api/trainers", (req, res) => {
+  if (res.status(200)) {
+    res.send(trainers.getAll());
+  } else {
+    res.status(404).send({ error: true, msg: "Json file not loaded" });
+  }
+});
+
+app.post("/api/trainers/new", upload.single("trainer_image"), (req, res) => {
+  let filepath = req.file.path.replace("\\", "/");
+  const newTrainer = {
+    id: `${Date.now()}`,
+    user_id: req.body.user_id,
+    name: req.body.name,
+    email: req.body.email,
+    trainer_image: filepath,
+    mobile: req.body.mobile,
+    added_date: `${Date.now()}`,
+    facebook: req.body.facebook,
+    twitter: req.body.twitter,
+    instagram: req.body.instagram,
+    github: req.body.github,
+    account_status: "",
+  };
+
+  if (
+    newTrainer.name == null ||
+    newTrainer.email == null ||
+    newTrainer.trainer_image == null ||
+    newTrainer.mobile == null
+  ) {
+    res.status(401).send({ error: true, msg: "User data missing" });
+  } else {
+    trainers.addNewTrainer(newTrainer);
+    res.send({ success: true, msg: "Trainer added successfully" });
+  }
+});
+app.listen(process.env.PORT || 3000, () => console.log("Listening port 3000"));

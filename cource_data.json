@@ -1,32 +1,16 @@
 [
-  {
-    "name": "python",
-    "title": "Python Programming",
-    "data": [
-      {
-        "id": "1623060347046",
-        "trainer": "vetri_0206",
-        "concept_name": "What is CSS?",
-        "concept_image": "uploads/concept_image-1623060347034.jpeg",
-        "concept_video": "sample Video",
-        "content": {
-          "code": "python",
-          "description": "sample",
-          "source_link": "link"
-        }
-      }
-    ]
-  },
+  { "name": "python", "title": "Python Programming", "data": [] },
   {
     "name": "web",
     "title": "Web Designing",
     "data": [
       {
-        "id": "1623060156154",
+        "id": "1623078124338",
         "trainer": "vetri_0206",
-        "concept_name": "What is HTML?",
-        "concept_image": "uploads/concept_image-1623060156140.jpeg",
+        "concept_name": "What is CSS?",
+        "concept_image": "uploads/concept_image-1623078124322.jpeg",
         "concept_video": "sample Video",
+        "added_date": "1623078124338",
         "content": {
           "html_code": "Html",
           "css_code": "css",

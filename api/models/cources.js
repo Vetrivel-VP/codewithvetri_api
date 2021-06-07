@@ -27,8 +27,19 @@ class Cources {
     this.storeData(data);
   }
 
-  editCource() {
-    // to edit new course
+  editCource(cource_name, updateData) {
+    // to edit the course
+    // const courceData = this.readData();
+    // courceData.forEach((mainElement, i) => {
+    //   if (courceData[i].name === cource_name) {
+    //     courceData[i].data.forEach((element, j) => {
+    //       if (element.id === updateData.id) {
+    //         console.log(cource);
+    //       }
+    //     });
+    //   }
+    // });
+    console.log(updateData);
   }
 
   deleteCource(cource_name, cource_id) {
