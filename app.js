@@ -75,31 +75,17 @@ app.post(
       concept_image: filepath,
       concept_video: req.body.concept_video,
       added_date: `${Date.now()}`,
+      description: req.body.description,
+      source_link: req.body.source_link,
     };
-    switch (cource_name) {
-      case "python":
-        newCource.content = {
-          code: req.body.content.code,
-          description: req.body.content.description,
-          source_link: req.body.content.source_link,
-        };
-        break;
-      case "web":
-        newCource.content = {
-          html_code: req.body.content.html_code,
-          css_code: req.body.content.css_code,
-          js_code: req.body.content.js_code,
-          description: req.body.content.description,
-          source_link: req.body.content.source_link,
-        };
-        break;
-    }
+
     cource_data.addNew(cource_name, newCource);
     if (
       newCource.trainer == null ||
       newCource.concept_name == null ||
       newCource.concept_video == null ||
-      newCource.content.source_link == null
+      newCource.description == null ||
+      newCource.source_link == null
     ) {
       res
         .status(409)
@@ -120,6 +106,41 @@ app.delete("/api/cources/delete/:cource_name/:cource_id", (req, res) => {
     res.status(200).send({ success: true, msg: result });
   }
 });
+
+// Update cources
+app.put(
+  "/api/cources/update/:cource_name/:cource_id",
+  upload.single("concept_image"),
+  (req, res) => {
+    const cource_name = req.params.cource_name;
+    const cource_id = req.params.cource_id;
+    const bodyData = req.body;
+    if (req.file) {
+      let filepath = req.file.path.replace("\\", "/");
+      bodyData.concept_image = filepath;
+    }
+    if (
+      bodyData.trainer == null ||
+      bodyData.concept_name == null ||
+      bodyData.concept_image == null ||
+      bodyData.concept_video == null ||
+      bodyData.description == null ||
+      bodyData.source_link == null
+    ) {
+      res
+        .status(409)
+        .send({ error: true, msg: "Warning* : Required fields missing" });
+    } else {
+      let flag,
+        msg = cource_data.editCource(cource_name, cource_id, bodyData);
+      if (flag == true) {
+        res.status(200).send({ success: true, msg: msg });
+      } else {
+        res.send({ error: true, msg: msg });
+      }
+    }
+  }
+);
 
 // Trainers API
 

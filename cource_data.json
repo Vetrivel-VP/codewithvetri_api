@@ -5,19 +5,14 @@
     "title": "Web Designing",
     "data": [
       {
-        "id": "1623078124338",
+        "id": "1623228584585",
         "trainer": "vetri_0206",
-        "concept_name": "What is CSS?",
-        "concept_image": "uploads/concept_image-1623078124322.jpeg",
-        "concept_video": "sample Video",
-        "added_date": "1623078124338",
-        "content": {
-          "html_code": "Html",
-          "css_code": "css",
-          "js_code": "js",
-          "description": "sample",
-          "source_link": "link"
-        }
+        "concept_name": "What is HTML?",
+        "concept_image": "uploads/concept_image-1623230605523.jpeg",
+        "concept_video": "sample Video updated",
+        "added_date": "1623230605528",
+        "description": "sample updated",
+        "source_link": "link"
       }
     ]
   }

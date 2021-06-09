@@ -27,19 +27,50 @@ class Cources {
     this.storeData(data);
   }
 
-  editCource(cource_name, updateData) {
+  editCource(cource_name, cource_id, updateData) {
     // to edit the course
-    // const courceData = this.readData();
-    // courceData.forEach((mainElement, i) => {
-    //   if (courceData[i].name === cource_name) {
-    //     courceData[i].data.forEach((element, j) => {
-    //       if (element.id === updateData.id) {
-    //         console.log(cource);
-    //       }
-    //     });
-    //   }
-    // });
-    console.log(updateData);
+    let msg = "";
+    const update_Data = JSON.parse(JSON.stringify(updateData));
+    const mainData = this.readData();
+    mainData.forEach((main_element, i) => {
+      if (main_element.name == cource_name) {
+        main_element.data.forEach((element, j) => {
+          if (element.id === cource_id) {
+            msg = " Data Saved Successfully";
+            if (update_Data.trainer) {
+              element.trainer = update_Data.trainer;
+              element.added_date = `${Date.now()}`;
+            }
+            if (update_Data.concept_name) {
+              element.concept_name = update_Data.concept_name;
+            }
+            if (update_Data.concept_video) {
+              element.concept_video = update_Data.concept_video;
+            }
+            if (update_Data.concept_image) {
+              let pathImage = element.concept_image;
+              try {
+                fs.unlinkSync(`./${pathImage}`);
+              } catch (error) {}
+              element.concept_image = update_Data.concept_image;
+            }
+            if (update_Data.description) {
+              element.description = update_Data.description;
+            }
+            if (update_Data.source_link) {
+              element.source_link = update_Data.source_link;
+            }
+            this.storeData(mainData);
+          } else {
+            msg = "Error : Invalid Cource ID";
+          }
+        });
+      } else {
+        msg = "Error : Invalid Cource Name";
+      }
+    });
+
+    return true, msg;
   }
 
   deleteCource(cource_name, cource_id) {
