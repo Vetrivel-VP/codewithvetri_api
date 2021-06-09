@@ -154,6 +154,17 @@ app.get("/api/trainers", (req, res) => {
   }
 });
 
+// get single trainer
+app.get("/api/trainers/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const foundTrainer = trainers.getIndividualTrainer(user_id);
+  if (foundTrainer) {
+    res.status(200).send({ success: true, cource: foundTrainer });
+  } else {
+    res.status(404).send({ error: true, msg: "User Not found" });
+  }
+});
+
 app.post("/api/trainers/new", upload.single("trainer_image"), (req, res) => {
   let filepath = req.file.path.replace("\\", "/");
   const newTrainer = {
@@ -179,8 +190,8 @@ app.post("/api/trainers/new", upload.single("trainer_image"), (req, res) => {
   ) {
     res.status(401).send({ error: true, msg: "User data missing" });
   } else {
-    trainers.addNewTrainer(newTrainer);
-    res.send({ success: true, msg: "Trainer added successfully" });
+    const msg = trainers.addNewTrainer(newTrainer);
+    res.send({ success: true, msg: msg });
   }
 });
 app.listen(process.env.PORT || 3000, () => console.log("Listening port 3000"));
