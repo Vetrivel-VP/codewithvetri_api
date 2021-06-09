@@ -194,4 +194,46 @@ app.post("/api/trainers/new", upload.single("trainer_image"), (req, res) => {
     res.send({ success: true, msg: msg });
   }
 });
+
+// update new trainer
+app.put(
+  "/api/trainers/update/:user_id",
+  upload.single("trainer_image"),
+  (req, res) => {
+    const user_id = req.params.user_id;
+    const updateTrainer = req.body;
+    if (req.file) {
+      let filepath = req.file.path.replace("\\", "/");
+      updateTrainer.trainer_image = filepath;
+    }
+    if (
+      updateTrainer.name == null ||
+      updateTrainer.email == null ||
+      updateTrainer.trainer_image == null ||
+      updateTrainer.mobile == null
+    ) {
+      res.status(401).send({ error: true, msg: "User data missing" });
+    } else {
+      updateTrainer.added_date = `${Date.now()}`;
+      let flag,
+        msg = trainers.editTrainer(user_id, updateTrainer);
+      if (flag == true) {
+        res.send({ success: true, msg: msg });
+      } else {
+        res.send({ error: true, msg: msg });
+      }
+    }
+  }
+);
+
+// delete trainer
+app.delete("/api/trainers/delete/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+  const result = trainers.deleteTrainer(user_id);
+  if (res.status(404)) {
+    res.send({ error: true, msg: result });
+  } else {
+    res.status(200).send({ success: true, msg: result });
+  }
+});
 app.listen(process.env.PORT || 3000, () => console.log("Listening port 3000"));
